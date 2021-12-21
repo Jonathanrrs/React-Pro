@@ -4,24 +4,30 @@ interface Props {
     initialValue?: number /* para que sea opcional y ya no es obligatorio mandarla como props */
 }
 
+interface CounterState {
+    counter: number;
+    clicks: number;
+}
+
 
 export const CounterBy = ({ initialValue = 5 }: Props) => {
 
-    const [counterState, setCounterState] = useState({
+    const [{counter, clicks}, setCounterState] = useState<CounterState>({
         counter: initialValue,
         clicks: 0
     });
 
-    const {counter, clicks} = counterState;
+    // const {counter, clicks} = counterState;
 
     const handleClick = (value: number) => {
         // setCounterState({
         //      clicks: counter.clicks + 1,
         //      counter: counter.counter + value
         // });
-        setCounterState(prev => ({
-            clicks: prev.clicks + 1,
-            counter: prev.counter + value
+        /* respeta el coounter de los params por el scope */
+        setCounterState(({clicks, counter}) => ({
+            clicks: clicks + 1,
+            counter: counter + value
         }))
     }
 
