@@ -38,7 +38,7 @@ export const useCounter = ({maxCount = 10}) => {
     }, [counter]);
 
     return {
-        counterElement: elementToAnimate,
+        elementToAnimate,
         counter,
         handleClick
     }
