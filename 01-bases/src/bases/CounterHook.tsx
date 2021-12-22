@@ -4,7 +4,7 @@ import { useCounter } from '../hooks/useCounter';
 
 export const CounterHook = () => {
 
-    const {counterElement, counter, handleClick} = useCounter();
+    const {counterElement, counter, handleClick} = useCounter({maxCount: 10});
 
     return (
         <>
