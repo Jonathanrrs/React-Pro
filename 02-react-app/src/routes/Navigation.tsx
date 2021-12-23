@@ -4,6 +4,7 @@ import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import { routes } from './routes';
 import logo from '../logo.svg';
 
+/* Comentario */
 
 export const Navigation = () => {
     return (
