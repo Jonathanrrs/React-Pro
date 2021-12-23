@@ -2,7 +2,7 @@ import { BrowserRouter} from 'react-router-dom';
 import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import logo from '../logo.svg';
 
-
+/* Component compound pattern */
 
 export const Navigation = () => {
     return (
