@@ -16,11 +16,11 @@ export const ShoppingPage = () => {
                 flexDirection: 'row',
                 flexWrap: 'wrap'
             }}>
-                {/* <ProductCard product={product}>
+                <ProductCard product={product}>
                     <ProductCard.Image />
                     <ProductCard.Title title={'Café'}/>
                     <ProductCard.Buttons   />
-                </ProductCard> */}
+                </ProductCard>
 
                 <ProductCard product={product}>
                     <ProductImage/>
