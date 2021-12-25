@@ -28,8 +28,8 @@ export const ShoppingPage = () => {
                     /* esto puede ser cualquier nombre, es una clase personalizada */
                     className='bg-dark'
                 >
-                    <ProductImage />
-                    <ProductTitle />
+                    <ProductImage className="custom-image" />
+                    <ProductTitle className="text-white text-bold" />
                     <ProductButtons />
                 </ProductCard>
 
