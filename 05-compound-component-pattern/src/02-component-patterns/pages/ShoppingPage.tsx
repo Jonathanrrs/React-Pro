@@ -17,10 +17,10 @@ export const ShoppingPage = () => {
                 flexDirection: 'row',
                 flexWrap: 'wrap'
             }}>
-                <ProductCard product={product}>
-                    <ProductCard.Image />
-                    <ProductCard.Title title={'Café'} />
-                    <ProductCard.Buttons />
+                <ProductCard product={product} className="bg-dark text-white">
+                    <ProductCard.Image className="custom-image" />
+                    <ProductCard.Title title={'Café'}  className="text-bold" />
+                    <ProductCard.Buttons className="custom-buttons" />
                 </ProductCard>
 
                 <ProductCard
