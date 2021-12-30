@@ -29,7 +29,22 @@ export const ShoppingPage = () => {
     const [shoppingCart, setShoppingCart] = useState<{[key:string]: ProductInCart}>({});
 
     const onProductCountChange = ({count, product}: {count:number, product: Product}) => {
-        console.log('onProductCountChange', count, product);
+        
+        setShoppingCart(oldShoppingCart => {
+
+            if(count === 0) {
+
+                /* queremos mantener el resto */
+                const {[product.id]: toDelete, ...rest} = oldShoppingCart;
+                return rest;
+            }
+
+            return {
+                ...oldShoppingCart,
+                /* computado */
+                [product.id] : {...product, count}
+            }
+        })
         
     }
 
@@ -81,6 +96,13 @@ export const ShoppingPage = () => {
                     <ProductTitle/>
                     <ProductButtons className="custom-buttons" />
                 </ProductCard>
+            </div>
+
+            <div>
+                <code>
+                    {JSON.stringify(shoppingCart, null, 5)}
+                    
+                </code>
             </div>
         </div>
     )
