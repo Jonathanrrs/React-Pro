@@ -1,4 +1,4 @@
-import { createContext, ReactElement } from 'react';
+import { createContext, ReactElement, CSSProperties } from 'react';
 
 import { useProduct } from '../hooks/useProduct';
 import { ProductContextProps, Product } from '../interfaces/interfaces';
@@ -13,10 +13,12 @@ export interface Props {
     product: Product;
     children?: ReactElement | ReactElement[];
     className?: string;
+    /* para que acepte las propiedades de style de css */
+    style?: CSSProperties;
 }
 
 
-export const ProductCard = ({ children, product, className }: Props) => {
+export const ProductCard = ({ children, product, className, style }: Props) => {
 
     const { counter, increaseBy } = useProduct();
 
@@ -27,7 +29,10 @@ export const ProductCard = ({ children, product, className }: Props) => {
             product
         }}>
             {/* asi para obtener la clase personalizada */}
-            <div className={`${styles.productCard} ${className}`}>
+            <div 
+                className={`${styles.productCard} ${className}`}
+                style={style}
+            >
                 {children}
             </div>
         </Provider>
