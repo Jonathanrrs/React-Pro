@@ -15,12 +15,13 @@ export interface Props {
     className?: string;
     /* para que acepte las propiedades de style de css */
     style?: CSSProperties;
+    onChange?: () => void;
 }
 
 
-export const ProductCard = ({ children, product, className, style }: Props) => {
+export const ProductCard = ({ children, product, className, style, onChange }: Props) => {
 
-    const { counter, increaseBy } = useProduct();
+    const { counter, increaseBy } = useProduct(onChange);
 
     return (
         <Provider value={{
