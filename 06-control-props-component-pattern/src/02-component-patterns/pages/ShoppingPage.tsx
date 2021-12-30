@@ -28,8 +28,8 @@ export const ShoppingPage = () => {
     /* va entre llaves, no es un arreglo, viene una X cantidad de llaves dentro el objeto */
     const [shoppingCart, setShoppingCart] = useState<{[key:string]: ProductInCart}>({});
 
-    const onProductCountChange = () => {
-        console.log('onProductCountChange');
+    const onProductCountChange = ({count, product}: {count:number, product: Product}) => {
+        console.log('onProductCountChange', count, product);
         
     }
 
@@ -50,7 +50,7 @@ export const ShoppingPage = () => {
                             product={product}
                             /* esto puede ser cualquier nombre, es una clase personalizada */
                             className="bg-dark text-white"
-                            onChange={() => onProductCountChange()}
+                            onChange={(evento) => onProductCountChange(evento)}
                         >
                             <ProductImage className="custom-image" />
                             <ProductTitle className="text-bold" />
@@ -65,7 +65,7 @@ export const ShoppingPage = () => {
                     /* esto puede ser cualquier nombre, es una clase personalizada */
                     className="bg-dark text-white"
                     style={{width: '100px'}}
-                    onChange={() => onProductCountChange()}
+                    // onChange={() => onProductCountChange()}
                 >
                     <ProductImage className="custom-image" />
                     <ProductTitle/>
