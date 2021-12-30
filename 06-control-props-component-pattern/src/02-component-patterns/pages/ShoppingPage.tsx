@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import { ProductButtons, ProductCard, ProductImage, ProductTitle } from '../components';
 import '../styles/custom-styles.css';
+
+
 import { Product } from '../interfaces/interfaces';
 
 const product1 = {
@@ -15,7 +18,16 @@ const product2 = {
 
 const products: Product[] = [product1, product2];
 
+/* se puede exteneder en una interface como una clase */
+interface ProductInCart extends Product {  
+    count: number;
+}
+
 export const ShoppingPage = () => {
+
+    /* va entre llaves, no es un arreglo, viene una X cantidad de llaves dentro el objeto */
+    const [shoppingCart, setShoppingCart] = useState<{[key:string]: ProductInCart}>({});
+
     return (
         <div>
             <h1>Shopping Store</h1>
