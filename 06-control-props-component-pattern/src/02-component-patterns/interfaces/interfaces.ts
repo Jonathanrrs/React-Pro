@@ -27,3 +27,8 @@ export interface onChangeArgs {
     product: Product;
     count: number;
 }
+
+/* se puede exteneder en una interface como una clase */
+export interface ProductInCart extends Product {
+    count: number;
+}
