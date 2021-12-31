@@ -25,13 +25,14 @@ export interface Props {
 
 export const ProductCard = ({ children, product, className, style, onChange, value, initialValues }: Props) => {
 
-    const { counter, increaseBy } = useProduct({onChange, product, value, initialValues});
+    const { counter, increaseBy, maxCount } = useProduct({onChange, product, value, initialValues});
 
     return (
         <Provider value={{
             counter,
             increaseBy,
             product,
+            maxCount
         }}>
             {/* asi para obtener la clase personalizada */}
             <div 
