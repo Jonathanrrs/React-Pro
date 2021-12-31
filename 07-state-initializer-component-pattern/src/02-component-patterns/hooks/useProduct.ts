@@ -13,6 +13,8 @@ export const useProduct = ({ onChange, product, value = 0, initialValues }: useP
     /* si el initialValue es undefined toma el valor de value */
     const [counter, setCounter] = useState<number>(initialValues?.count || value);
 
+    const isMounted = useRef(false);
+
     /* si esto es true */
     const isControlled = useRef(!!onChange);
 
@@ -24,7 +26,9 @@ export const useProduct = ({ onChange, product, value = 0, initialValues }: useP
         }
 
 
-        const newValue = Math.max(counter + value, 0);
+        const newValue = initialValues?.maxCount ?
+            Math.max(counter + value, 0) && Math.min(counter + value, 10)
+            : Math.max(counter + value, 0);
         setCounter(newValue);
 
         /* si tiene algo que dispare la funcion, es como un if */
@@ -32,8 +36,18 @@ export const useProduct = ({ onChange, product, value = 0, initialValues }: useP
     }
 
     useEffect(() => {
+
+        /* no hace falta mandarlo como dependencia */
+        if (!isMounted.current) return;
+
         setCounter(value);
     }, [value])
+
+    /* tratar que los useEffect solo hagan una tarea especifica */
+
+    useEffect(() => {
+        isMounted.current = true;
+    }, [])
 
     return {
         counter,
