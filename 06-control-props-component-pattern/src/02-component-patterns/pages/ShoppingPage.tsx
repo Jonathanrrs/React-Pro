@@ -33,18 +33,32 @@ export const ShoppingPage = () => {
         
         setShoppingCart(oldShoppingCart => {
 
-            if (count === 0) {
+            const productInCart: ProductInCart = oldShoppingCart[product.id] || {...product, count: 0};
 
-                /* queremos mantener el resto */
-                const { [product.id]: toDelete, ...rest } = oldShoppingCart;
+            if(Math.max(productInCart.count + count, 0) > 0) {
+                productInCart.count += count;
+                return {
+                    ...oldShoppingCart,
+                    [product.id]: productInCart
+                }
+            }
+
+            /* borrar el producto */
+            const { [product.id]: toDelete, ...rest } = oldShoppingCart;
                 return rest;
-            }
 
-            return {
-                ...oldShoppingCart,
-                /* computado */
-                [product.id]: { ...product, count }
-            }
+            // if (count === 0) {
+
+            //     /* queremos mantener el resto */
+            //     const { [product.id]: toDelete, ...rest } = oldShoppingCart;
+            //     return rest;
+            // }
+
+            // return {
+            //     ...oldShoppingCart,
+            //     /* computado */
+            //     [product.id]: { ...product, count }
+            // }
         })
 
     }
