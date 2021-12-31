@@ -11,7 +11,8 @@ const { Provider } = ProductContext;
 
 export interface Props {
     product: Product;
-    children?: ReactElement | ReactElement[];
+    // children?: ReactElement | ReactElement[];
+    children: (mensaje: string) => JSX.Element;
     className?: string;
     /* para que acepte las propiedades de style de css */
     style?: CSSProperties;
@@ -37,7 +38,8 @@ export const ProductCard = ({ children, product, className, style, onChange, val
                 className={`${styles.productCard} ${className}`}
                 style={style}
             >
-                {children}
+                {/* ejecutamos la funcion porque regresa un jsx */}
+                {children('hola')}
             </div>
         </Provider>
     )

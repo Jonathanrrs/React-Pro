@@ -23,9 +23,16 @@ export const ShoppingPage = () => {
                 }}
 
             >
-                <ProductImage className="custom-image" />
-                <ProductTitle className="text-bold" />
-                <ProductButtons className="custom-buttons" />
+                {
+                    (mensaje) => (
+                        <>
+                            <ProductImage className="custom-image" />
+                            <ProductTitle className="text-bold" />
+                            <ProductButtons className="custom-buttons" />
+                            <h1>{mensaje}</h1>
+                        </>
+                    )
+                }
             </ProductCard>
 
 
