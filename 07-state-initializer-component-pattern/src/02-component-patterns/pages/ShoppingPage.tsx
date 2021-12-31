@@ -24,12 +24,13 @@ export const ShoppingPage = () => {
 
             >
                 {
-                    (mensaje) => (
+                    ({reset}) => (
                         <>
                             <ProductImage className="custom-image" />
                             <ProductTitle className="text-bold" />
                             <ProductButtons className="custom-buttons" />
-                            <h1>{mensaje}</h1>
+
+                            <button onClick={reset}>Reset</button>
                         </>
                     )
                 }
