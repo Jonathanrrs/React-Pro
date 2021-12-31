@@ -28,7 +28,7 @@ export const ProductCard = ({ children, product, className, style, onChange, val
         <Provider value={{
             counter,
             increaseBy,
-            product
+            product,
         }}>
             {/* asi para obtener la clase personalizada */}
             <div 
