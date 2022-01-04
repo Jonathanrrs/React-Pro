@@ -7,6 +7,10 @@
     "dist",
     "src"
   ],
+  "repository": {
+    "url": "https://github.com/Jonathanrrs/React-Pro/tree/master/jr-product-card",
+    "type": "git"
+  },
   "engines": {
     "node": ">=10"
   },
@@ -60,5 +64,11 @@
     "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
     "typescript": "^4.5.4"
-  }
+  },
+  "keywords": [
+    "product",
+    "card",
+    "jonathan",
+    "ruiz"
+  ]
 }
