@@ -1,52 +1,65 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent,  FormEvent} from 'react';
 import '../styles/styles.css';
 
 
 export const RegisterPage = () => {
 
     const [registerData, setRegisterData] = useState({
-        name: 'jonathan',
-        email: 'jonathan@gmail.com',
-        password1: '123456',
-        password2: '123456',
+        name: '',
+        email: '',
+        password1: '',
+        password2: '',
     });
 
-    const {name, email, password1, password2} = registerData;
+    const { name, email, password1, password2 } = registerData;
 
-    const onChange = (event:ChangeEvent<HTMLInputElement>)=> {
-        
+    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+
+        setRegisterData(prev => ({
+            ...prev,
+            [event.target.name]: event.target.value
+        }))
+
+    }
+
+    const onSubmit = (event : FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
     }
 
     return (
         <div>
             <h1>Register Page</h1>
 
-            <form>
-            <input
-                type="text"
-                placeholder="Name"
-                value={name}
-                onChange={onChange}
-            />
-            <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={onChange}
-            />
-            <input
-                type="password"
-                placeholder="Password"
-                value={password1}
-                onChange={onChange}
-            />
-            <input
-                type="password"
-                placeholder="Repeat Password"
-                value={password2}
-                onChange={onChange}
-            />
-            <button type="submit">Create</button>
+            <form noValidate onSubmit={onSubmit}>
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    value={name}
+                    onChange={onChange}
+                />
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={onChange}
+                />
+                <input
+                    type="password"
+                    name="password1"
+                    placeholder="Password"
+                    value={password1}
+                    onChange={onChange}
+                />
+                <input
+                    type="password"
+                    name="password2"
+                    placeholder="Repeat Password"
+                    value={password2}
+                    onChange={onChange}
+                />
+                <button type="submit">Create</button>
             </form>
         </div>
     )
