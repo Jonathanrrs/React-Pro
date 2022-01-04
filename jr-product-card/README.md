@@ -12,7 +12,6 @@ import {ProductCard,ProductImage, ProductTitle, ProductButtons} from 'jr-product
 
 ```
 <ProductCard
-    key={product.id}
     product={product}
     initialValues={{
         count: 4,
@@ -24,7 +23,7 @@ import {ProductCard,ProductImage, ProductTitle, ProductButtons} from 'jr-product
             <>
                 <ProductImage />
                 <ProductTitle />
-                <ProductButtons 
+                <ProductButtons />
             </>
         )
     }
