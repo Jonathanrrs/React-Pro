@@ -30,7 +30,7 @@ export const Navigation = () => {
                     <Route path="users" element={<h1>Users</h1>} />
                     <Route path="register" element={<RegisterPage />} />
 
-                    <Route path="/*" element={<Navigate to="/home" replace />} />
+                    <Route path="/*" element={<Navigate to="/register" replace />} />
                 </Routes>
 
             </div>

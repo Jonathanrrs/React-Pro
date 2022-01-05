@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 /* el tipo de dato T es lo que sea que se le esté pasando por los params a initState */
 export const useForm = <T>(initState: T) => {
