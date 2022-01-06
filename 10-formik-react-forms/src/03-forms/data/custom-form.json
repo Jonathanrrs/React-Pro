@@ -1,16 +1,23 @@
 [
     {
-        "type": "input",
+        "type": "text",
         "name": "firstName",
         "placeholder": "Jonathan",
         "label": "First Name",
         "value": ""
     },
     {
-        "type": "input",
+        "type": "text",
         "name": "lastName",
         "placeholder": "Ruiz",
         "label": "Last Name",
+        "value": ""
+    },
+    {
+        "type": "email",
+        "name": "email",
+        "placeholder": "Email",
+        "label": "Email",
         "value": ""
     }
 ]
