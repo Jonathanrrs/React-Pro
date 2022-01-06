@@ -17,10 +17,16 @@ for (const input of formJson) {
 
     for (const rule of input.validations) {
         if(rule.type === 'required') {
-            schema = schema.required('Este campo es requerido')
+            schema = schema.required('Este campo es requerido');
         }
 
-        /* otras reglas */
+        if (rule.type === 'minLength') {
+            schema = schema.min((rule as any).value || 2, `Mínimo de ${(rule as any).value || 2} caracteres`)
+        }
+
+        if(rule.type === 'email') {
+            schema = schema.email(`Debe ser un correo válido`);
+        }
 
         requiredFields[input.name] = schema;
     }
