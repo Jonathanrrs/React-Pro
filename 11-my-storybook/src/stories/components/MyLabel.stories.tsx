@@ -6,13 +6,14 @@ export default {
     title: 'UI/MyLabel',
     component: MyLabel,
     argTypes: {
-        color: {control: 'select'}
+        color: {control: 'select'},
+        fontColor: {control: 'color'}
     }
 } as ComponentMeta<typeof MyLabel>
 
 const Template: ComponentStory<typeof MyLabel> = (args) => <MyLabel {...args} />
 
-/* se crea una complia del template, para tener diferentes  historias */
+/* se crea una copia del template, para tener diferentes  historias */
 export const Basic = Template.bind({});
 Basic.args = {
     size: 'normal',
@@ -35,4 +36,12 @@ export const Tertiary = Template.bind({});
 Tertiary.args = {
     size: 'normal',
     color: 'tertiary'
+}
+
+/* CustomFontColor */
+
+export const CustomFontColor = Template.bind({});
+CustomFontColor.args = {
+    size: 'h1',
+    fontColor: '#000000'
 }
