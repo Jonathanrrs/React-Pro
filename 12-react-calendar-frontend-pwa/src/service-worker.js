@@ -84,16 +84,26 @@ self.addEventListener('install', async(event) => {
   ])
 });
 
+// http://localhost:4000/api/events
+
+const apiOfflineFallbacks = [
+  'http://localhost:4000/api/events',
+  'http://localhost:4000/api/auth/renew'
+]
+
 self.addEventListener('fetch', (event) => {
 
-  // console.log(event.request.url);
-  
 
-  if(event.request.url !== 'http://localhost:4000/api/auth/renew') return;
+  // if(event.request.url !== 'http://localhost:4000/api/auth/renew') return;
+  if(!apiOfflineFallbacks.includes(event.request.url)) return;
   
   /* se recomienda trabajar con la manera mas pura(fetch) */
   const resp = fetch(event.request)
     .then(response => {
+
+      if(!response) {
+        return caches.match(event.request);
+      }
 
       /* guardar en cache la respuesta */
       caches.open('cache-dynamic')
