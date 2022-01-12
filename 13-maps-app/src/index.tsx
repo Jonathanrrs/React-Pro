@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { MapsApp } from './MapsApp';
 
+if(!navigator.geolocation) {
+  alert('Tu navegador no tiene opción de Geolocation');
+  throw new Error('Tu navegador no tiene opción de Geolocation')
+}
 
 ReactDOM.render(
   <React.StrictMode>
