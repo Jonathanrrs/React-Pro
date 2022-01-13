@@ -1,10 +1,10 @@
 import { useContext, useEffect, useReducer } from 'react';
-import { Map, Marker, Popup } from 'mapbox-gl';
+import { AnySourceData, LngLatBounds, Map, Marker, Popup } from 'mapbox-gl';
 
 import { MapContext } from './MapContext';
 import { mapReducer } from './mapReducer';
 import { PlacesContext } from '../';
-import {DirectionsApi} from '../../apis';
+import { DirectionsApi } from '../../apis';
 import { DirectionsResponse } from '../../interfaces/directions';
 
 export interface MapState {
@@ -51,7 +51,7 @@ export const MapProvider = ({ children }: Props) => {
 
             /* limpiar polyline */
 
-            dispatch({type: 'setMarkers', payload: newMarkers})
+            dispatch({ type: 'setMarkers', payload: newMarkers })
         }
 
     }, [places])
@@ -60,8 +60,8 @@ export const MapProvider = ({ children }: Props) => {
 
         const myLocationPopup = new Popup()
             .setHTML(`
-            <h4>Aquí estoy</h4>
-            <p>En algún lugar del mundo</p>
+                <h4>Aquí estoy</h4>
+                <p>En algún lugar del mundo</p>
             `)
 
         new Marker({
@@ -74,17 +74,74 @@ export const MapProvider = ({ children }: Props) => {
         dispatch({ type: 'setMap', payload: map })
     }
 
-    const getRouteBetweenPoints = async(start: [number, number], end: [number, number]) => {
+    const getRouteBetweenPoints = async (start: [number, number], end: [number, number]) => {
         const resp = await DirectionsApi.get<DirectionsResponse>(`/${start.join(',')};${end.join(',')}`);
-        const {distance, duration, geometry} = resp.data.routes[0];
-        
-        let kms = distance/1000;
-            kms = Math.round(kms * 100);
-            kms /= 100;
+        const { distance, duration, geometry } = resp.data.routes[0];
+        const {coordinates: coords} = geometry;
 
-        const minutes = Math.floor(duration/60);
-        console.log({distance, minutes});
+        let kms = distance / 1000;
+        kms = Math.round(kms * 100);
+        kms /= 100;
+
+        const minutes = Math.floor(duration / 60);
+
+        const bounds = new LngLatBounds(
+            start,
+            start
+        );
+
+        for (const coord of coords) {
+            const newCoord: [number, number] = [ coord[0], coord[1]]
+            bounds.extend(newCoord);
+
+            state.map?.fitBounds(bounds, {
+                padding: 200
+            });
+        }
+
+        /* polyline */
+
+        const sourceData: AnySourceData = {
+            type: 'geojson',
+            data: {
+                type: 'FeatureCollection',
+                features: [
+                    {
+                        type: 'Feature',
+                        properties: {},
+                        geometry: {
+                            type: 'LineString',
+                            coordinates: coords
+                        }
+                    }
+                ]
+            }
+        }
+
+        /* remover polyline si existe */
+        if(state.map?.getLayer('RouteString')) {
+            state.map.removeLayer('RouteString');
+            state.map.removeSource('RouteString');
+
+        }
+
+        state.map?.addSource('RouteString', sourceData);
         
+        state.map?.addLayer({
+            id: 'RouteString',
+            type: 'line',
+            source: 'RouteString',
+            layout: {
+                'line-cap': 'round',
+                'line-join': 'round'
+            },
+            paint: {
+                'line-color': 'white',
+                'line-width': 3
+            }
+        })
+
+
 
     }
 
