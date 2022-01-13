@@ -16,7 +16,7 @@ export const MapView = () => {
         if (!isLoading) {
             const map = new Map({
                 container: mapDiv.current!, // container ID, el ! porque sabemos que habrá un valor
-                style: 'mapbox://styles/mapbox/streets-v11', // style URL
+                style: 'mapbox://styles/mapbox/dark-v10', // style URL
                 center: userLocation,// starting position [lng, lat]
                 zoom: 14 // starting zoom
             });
